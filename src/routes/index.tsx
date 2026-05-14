@@ -13,11 +13,11 @@ export const Route = createFileRoute("/")({
   component: ReadingPage,
   head: () => ({
     meta: [
-      { title: "FoodCourt+ Recommendation System — SUTT AI/ML Round 2" },
+      { title: "FoodCourt+ Recommendation System" },
       {
         name: "description",
         content:
-          "FoodCourt+ Recommendation System: a technical design submission by Saurav Yadav for SUTT AI/ML Round 2.",
+          "FoodCourt+ Recommendation System",
       },
     ],
     links: [
@@ -114,7 +114,7 @@ function ReadingPage() {
       {/* Mobile top bar */}
       <div className="lg:hidden sticky top-0 z-40 flex items-center justify-between px-5 py-3 border-b" style={{ background: "var(--paper)", borderColor: "var(--rule)" }}>
         <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--ink-muted)" }}>
-          FoodCourt+ · SUTT R2
+          FoodCourt+
         </span>
         <button
           onClick={() => setNavOpen((v) => !v)}
@@ -131,14 +131,8 @@ function ReadingPage() {
           className={`${navOpen ? "block" : "hidden"} lg:block lg:sticky lg:top-0 lg:self-start lg:h-screen lg:w-64 shrink-0 lg:overflow-y-auto py-10`}
         >
           <div className="mb-6 hidden lg:block">
-            <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-muted)" }}>
-              SUTT AI/ML — Round 2
-            </div>
-            <div style={{ fontFamily: "var(--font-serif)", fontSize: "1.1rem", fontWeight: 700, marginTop: "0.3rem", color: "var(--ink)" }}>
+            <div style={{ fontFamily: "var(--font-serif)", fontSize: "1.1rem", fontWeight: 700, color: "var(--ink)" }}>
               FoodCourt+
-            </div>
-            <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", color: "var(--ink-muted)", marginTop: "0.2rem" }}>
-              Saurav Yadav · 2025A7UB1832P
             </div>
           </div>
           <nav>
@@ -208,7 +202,7 @@ function ReadingPage() {
           </ReactMarkdown>
 
           <footer style={{ marginTop: "5rem", paddingTop: "2rem", borderTop: "1px solid var(--rule)", fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--ink-muted)", textAlign: "center" }}>
-            End of submission · Saurav Yadav · 2025A7UB1832P
+            FoodCourt+
           </footer>
         </article>
       </div>

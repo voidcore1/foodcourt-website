@@ -1,6 +1,5 @@
 # FoodCourt+ Recommendation System
-## SUTT AI/ML — Round 2 Submission
-## Saurav Yadav : 2025A7UB1832P
+
 
 # Section 1 — Data Strategy
 
