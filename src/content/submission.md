@@ -1,5 +1,46 @@
 # FoodCourt+ Recommendation System
 
+## What is this?
+
+This document is a complete system design for a **personalised food recommendation engine** built for FoodCourt+, a subsidised cafeteria inside a shopping mall. It covers how to go from raw purchase history to a working recommendation system — including data strategy, the ML model, the serving pipeline, and how to evaluate whether it's actually working.
+
+If you've never heard of FoodCourt+ before, everything you need to know is below.
+
+---
+
+## The Problem
+
+**FoodCourt+** is a subsidised cafeteria occupying two floors of a mall's east wing. It runs 10 independent food stalls — North Indian, South Indian, Chinese, Continental, Pizza, Street Food/Chaat, Healthy Salads, Desserts, Beverages, and Japanese/Korean — totalling around **273 menu items**. Every stall has its own queue, its own billing counter, and its own seating. There is no shared space between stalls.
+
+Customers order either through a **mobile app** or **kiosk terminals** installed at each stall. Around 18,000 unique visitors come each month, of whom **4,500 are loyalty programme members** who have been tracked for up to 18 months.
+
+The cafeteria wants to show each customer a personalised list of food recommendations when they open the app or walk up to a kiosk — the kind of "you might like this" feature you'd expect from any modern food platform.
+
+### Why is this hard?
+
+The obvious way to build a recommendation system is to ask users what they like and use those ratings. FoodCourt+ has **never done this**. No ratings, no dietary preferences, no demographic data — just a name, phone number, and 18 months of purchase records.
+
+That leaves purchase history as the only signal, and purchase history is a terrible proxy for preference. Consider: a customer who buys Masala Dosa every morning and Chaat twice a month — does that mean they love dosa 5× more than chaat? Probably not. The dosa is habit (cheap, quick, before work). The chaat is a deliberate choice. The system has to figure out the difference between habit and genuine preference without ever asking.
+
+On top of that:
+- **15% of the menu changes every month** — new items appear that the model has never seen
+- **Only 70% of items have veg/non-veg tags**, and only 45% have allergen info, both maintained without any enforcement
+- The upper floor stalls get significantly less footfall than ground floor ones — not because customers dislike the food, but because of a staircase
+- Walk-in customers with no loyalty account get no personalisation at all today
+
+### What this design covers
+
+This document answers: given these constraints, what is the right recommendation system to build? Not the most sophisticated one, but the right one for this actual problem — sized to the actual load (≈600 loyalty members on-site per day, 2 on-prem servers, no GPU), with explicit tradeoffs at every decision point.
+
+The sections that follow cover:
+1. **Data strategy** — what signals to extract from purchase history and what biases each introduces
+2. **ML design** — which model to use, how many recommendations to surface, and where it breaks
+3. **Cold start** — how new items and new users get handled before the model has seen them
+4. **Pipeline** — the full flow from raw data to a rendered recommendation card in the app
+5. **Evaluation** — how to know if it's working, and why naive metrics will lie to you
+6. **Infrastructure & cost** — what this actually costs to run on the existing hardware, with numbers
+
+---
 
 # Section 1 — Data Strategy
 
